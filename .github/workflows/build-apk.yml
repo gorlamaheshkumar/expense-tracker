@@ -4,6 +4,10 @@ name: Build Android APK
 # Windows, and this also sidesteps any corporate network / CDN blocks since all
 # Android SDK/NDK downloads happen on GitHub's servers).
 #
+# We install Buildozer directly (no third-party Docker action) for reliability.
+# Pinned to ubuntu-22.04 on purpose: 24.04 removed libtinfo5, which Android's
+# aapt needs, and to Cython <3 which python-for-android recipes require.
+#
 # Trigger: every push to main/master, or manually from the Actions tab
 # ("Run workflow"). Download the .apk from the run's Artifacts when it finishes.
 
@@ -15,22 +19,46 @@ on:
 jobs:
   build:
     name: Buildozer debug APK
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build APK with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          # Reads buildozer.spec at the repo root.
-          command: buildozer android debug
-          buildozer_version: stable
+          python-version: "3.11"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential ccache git zip unzip \
+            openjdk-17-jdk autoconf libtool pkg-config \
+            zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 \
+            cmake libffi-dev libssl-dev
+
+      - name: Install Buildozer
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install "cython<3.0" buildozer
+
+      - name: Cache Buildozer downloads
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.buildozer
+            .buildozer
+          key: buildozer-${{ runner.os }}-${{ hashFiles('buildozer.spec') }}
+          restore-keys: |
+            buildozer-${{ runner.os }}-
+
+      - name: Build debug APK
+        run: buildozer android debug
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: expensetracker-debug-apk
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: bin/*.apk
           if-no-files-found: error
