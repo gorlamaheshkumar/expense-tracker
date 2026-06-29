@@ -1,0 +1,13 @@
+# Desktop development dependencies.
+# Install with:  pip install --user -r requirements.txt
+#
+# NOTE: KivyMD is intentionally NOT used - its only PyPI artifact is a source
+# tarball served from files.pythonhosted.org, which the corporate proxy blocks
+# (403). Pure Kivy ships prebuilt wheels and installs cleanly, so the Cashew
+# look is hand-built with rounded canvas widgets instead.
+
+kivy==2.3.1
+
+# On Android these are provided by python-for-android, not pip:
+#   pyjnius   -> SMS content-provider access (expense/sms/provider.py)
+#   android   -> runtime permission requests (main.py)

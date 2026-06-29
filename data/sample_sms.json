@@ -1,0 +1,50 @@
+[
+  {
+    "id": "s1",
+    "sender": "VM-HDFCBK",
+    "mins_ago": 2,
+    "body": "Sent Rs.1,249.00 From HDFC Bank A/C *1234 To SWIGGY On 28-06 Ref 418876534521. Not You? Call 18002586161"
+  },
+  {
+    "id": "s2",
+    "sender": "AD-ICICIB",
+    "mins_ago": 41,
+    "body": "ICICI Bank Acct XX567 debited for Rs 2,000.00 on 28-Jun-24 to AMAZON. UPI:418876112233. Avl Bal Rs 53,210.50"
+  },
+  {
+    "id": "s3",
+    "sender": "JD-SBIINB",
+    "mins_ago": 95,
+    "body": "Dear Customer, Rs.45000 credited to your A/c XX1234 on 28/06/24 by SALARY transfer. Avl Bal Rs.71,230. -SBI"
+  },
+  {
+    "id": "s4",
+    "sender": "VK-AXISBK",
+    "mins_ago": 160,
+    "body": "Spent Card no. XX9012 INR 750 on 28-06-24 at ZOMATO. Avl Lmt INR 24,250. SMS BLOCK 9012 to 919951860002 if not you"
+  },
+  {
+    "id": "s5",
+    "sender": "VM-HDFCBK",
+    "mins_ago": 220,
+    "body": "Sent Rs.85.00 From HDFC Bank A/C *1234 To NAMMA METRO On 28-06 Ref 418999001122"
+  },
+  {
+    "id": "s6",
+    "sender": "AD-ICICIB",
+    "mins_ago": 300,
+    "body": "ICICI Bank Acct XX567 debited for Rs 599.00 on 28-Jun-24 to NETFLIX. UPI:418876445566. Avl Bal Rs 52,611.50"
+  },
+  {
+    "id": "s7",
+    "sender": "TX-PAYTM",
+    "mins_ago": 9,
+    "body": "Your HDFC OTP for txn of Rs 999 is 884512. Do not share with anyone."
+  },
+  {
+    "id": "s8",
+    "sender": "VK-AXISBK",
+    "mins_ago": 480,
+    "body": "Spent Card no. XX9012 INR 1,499 on 27-06-24 at BIGBASKET. Avl Lmt INR 25,000."
+  }
+]

@@ -1,0 +1,36 @@
+name: Build Android APK
+
+# Builds the debug APK on GitHub's Linux runners (Buildozer can't run on
+# Windows, and this also sidesteps any corporate network / CDN blocks since all
+# Android SDK/NDK downloads happen on GitHub's servers).
+#
+# Trigger: every push to main/master, or manually from the Actions tab
+# ("Run workflow"). Download the .apk from the run's Artifacts when it finishes.
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Buildozer debug APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build APK with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
+        with:
+          # Reads buildozer.spec at the repo root.
+          command: buildozer android debug
+          buildozer_version: stable
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: expensetracker-debug-apk
+          path: ${{ steps.buildozer.outputs.filename }}
+          if-no-files-found: error
