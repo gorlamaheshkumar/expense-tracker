@@ -29,12 +29,21 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Set up Java 17
+        # Android Gradle Plugin requires Java 17. apt-installing the JDK isn't
+        # enough — the runner's *active* JDK defaults to 11, so use setup-java
+        # to make 17 the active JAVA_HOME/PATH for the whole job.
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             build-essential ccache git zip unzip \
-            openjdk-17-jdk autoconf libtool pkg-config \
+            autoconf libtool pkg-config \
             zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 \
             cmake libffi-dev libssl-dev
 
