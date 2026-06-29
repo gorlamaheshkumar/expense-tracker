@@ -46,7 +46,9 @@ android.minapi = 24
 # android.ndk = 25b
 
 # (list) The Android archs to build for
-android.archs = arm64-v8a, armeabi-v7a
+# arm64-v8a only: covers essentially every phone from the last ~8 years and
+# halves build time vs. also building armeabi-v7a.
+android.archs = arm64-v8a
 
 # (bool) enables Android auto backup feature (Android API >=23)
 android.allow_backup = 1
